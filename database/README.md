@@ -1,21 +1,22 @@
 # Database scripts
 
-The scripts in this folder create the first SQL Server foundation for the project.
+The database folder is organized by responsibility rather than by one large deployment script.
 
-Run order:
+Current structure:
 
-1. `01_create_database.sql`
-2. `02_create_schemas.sql`
-3. `03_create_core_tables.sql`
-4. `04_create_staging_tables.sql`
-5. `05_create_audit_logging_tables.sql`
-6. `06_create_indexes.sql`
-7. `07_seed_reference_data.sql`
+```text
+tables/        core table definitions
+constraints/   foreign keys and additional constraints
+indexes/       non-clustered indexes
+reference/     small reference and demo seed data
+docs/          database model notes
+```
 
-The structure is split into schemas because this is closer to how I usually see operational data platforms organized:
+Recommended execution order for this commit:
 
-- `staging` for raw incoming records
-- `core` for cleaned business entities
-- `reporting` for later views and aggregates
-- `audit` for batch tracking
-- `logging` for operational logs
+1. `tables/*.sql`
+2. `constraints/*.sql`
+3. `indexes/*.sql`
+4. `reference/*.sql`
+
+The scripts assume that the database and base schemas from the previous commit already exist.
