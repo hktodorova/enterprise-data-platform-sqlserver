@@ -1,0 +1,6 @@
+pandas
+sqlalchemy
+pyodbc
+pytest
+python-dotenv
+faker
