@@ -1,50 +1,34 @@
 # ETL Process
 
+![ETL Flow](images/etl-flow.png)
+
 The project includes a lightweight Python-based ETL pipeline that demonstrates how business data can be imported into SQL Server using a staging-first approach.
 
 The current implementation focuses on creating a repeatable local workflow rather than a production-scale data integration platform. It provides a solid foundation that can be extended with incremental loading, orchestration and cloud services.
 
 ---
 
-## ETL Architecture
+## Pipeline Flow
 
-```text
-Sample Data Generator
-        │
-        ▼
-CSV Files
-        │
-        ▼
-Python ETL
-        │
-        ▼
-staging schema
-        │
-        ▼
-Data Validation
-        │
-        ▼
-core schema
-        │
-        ▼
-Reporting Views
-```
+The ETL workflow follows a staging-first architecture illustrated in the diagram above.
+
+Source files are generated, validated and loaded into the **staging** schema before being transformed into the normalized **core** schema. The resulting data can then be consumed by reporting and analytical workloads.
 
 ---
 
 ## Current Implementation
 
-The current version of the project includes:
+The current implementation includes:
 
-- sample business data generation using Python
+- Docker-based SQL Server environment
+- Python sample data generator
 - CSV-based source files
-- Docker-based execution environment
-- SQL Server staging tables
-- normalized core data model
+- staging and core schemas
+- normalized relational model
 - audit and logging tables
 - automated Python tests
 
-The ETL process is intentionally simple so it can be understood, modified and executed locally.
+The current implementation is intentionally lightweight, making it easy to understand, modify and execute in a local development environment.
 
 ---
 
@@ -72,9 +56,10 @@ Python is responsible for:
 - reading CSV files
 - validating input structure
 - transforming source records
-- preparing data for SQL Server
+- loading validated data into SQL Server
 - logging execution details
 - supporting automated tests
+- supporting repeatable local development
 
 ---
 
@@ -99,10 +84,20 @@ Future versions will extend logging with detailed batch statistics and error rep
 The ETL pipeline has been intentionally designed to allow future enhancements, including:
 
 - incremental loading
-- configurable source definitions
+- configuration-driven pipelines
+- execution metrics and monitoring
 - batch processing
 - retry mechanisms
 - orchestration with Apache Airflow
 - dbt transformations
 - Azure SQL support
-- execution metrics and monitoring
+
+---
+
+## Summary
+
+The current implementation demonstrates a practical staging-first ETL workflow commonly used in SQL Server data platforms.
+
+The design focuses on repeatability, maintainability and clear separation between raw source data and validated business entities.
+
+The architecture has been designed to be easy to understand, easy to extend and fully reproducible using Docker.

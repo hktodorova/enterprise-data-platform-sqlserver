@@ -1,24 +1,10 @@
 # Architecture
 
+![Architecture Diagram](images/architecture.png)
+
 This project uses a small layered data platform architecture built around SQL Server and Python.
 
-The goal is not to model a full enterprise system, but to show how data can move through a clear and maintainable structure:
-
-```text
-Source extracts
-    |
-    v
-Python ETL
-    |
-    v
-staging schema
-    |
-    v
-core schema
-    |
-    v
-reporting views
-```
+The goal is not to model a full enterprise system, but to show how data moves through a clear, layered and maintainable architecture. The diagram above illustrates the overall data flow from source systems through the ETL process into the staging and core schemas before exposing reporting views.
 
 ## Main layers
 

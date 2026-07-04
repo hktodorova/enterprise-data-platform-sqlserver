@@ -48,6 +48,8 @@ Password: YourStrongPassword123!
 Trust Server Certificate: enabled
 ```
 
+> **Note:** These SQL Server credentials are intended for the local Docker development environment only. For production deployments, use secure secrets or environment variables instead.
+
 ## Run database scripts
 
 Execute the SQL scripts in this order:

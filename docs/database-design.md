@@ -1,47 +1,64 @@
 # Database Design
 
-The database model is designed as a small enterprise-style operational data platform. It is intentionally compact, but it follows patterns that are common in larger SQL Server environments.
+![Database Diagram](images/database-diagram.png)
 
-## Schema layout
+The database model is designed as a compact enterprise-style operational data platform. While intentionally lightweight, it follows design patterns commonly found in SQL Server environments.
 
-The database is separated into logical schemas:
+The diagram above illustrates the logical relationships between the main business entities as well as the separation between the different database schemas.
 
-- `staging` – raw data loaded from external files or source extracts
-- `core` – cleaned and relational business entities
-- `reporting` – views prepared for analytics and reporting
-- `audit` – load tracking and batch history
-- `logging` – application and operational messages
+---
 
-This separation keeps raw data away from curated data and makes troubleshooting easier.
+## Schema Layout
 
-## Core model
+The database is organized into dedicated schemas, each with a specific responsibility:
 
-The core model represents business entities such as companies, customers, products and sales orders.
+- **staging** – raw data loaded from external files or source extracts
+- **core** – validated and normalized business entities
+- **reporting** – views prepared for analytics and reporting
+- **audit** – load tracking and batch history
+- **logging** – application and operational messages
 
-Typical flow:
+This separation keeps raw data isolated from curated business data, simplifies troubleshooting and supports repeatable ETL processing.
 
-```text
-Company
-  └── Customer
+---
 
-Product
-  └── SalesOrderLine
+## Core Data Model
 
-SalesOrderHeader
-  └── SalesOrderLine
-```
+The **core** schema represents the primary business entities used throughout the platform, including:
 
-The model uses primary keys, foreign keys and indexes to keep data consistent and query performance predictable.
+- Company
+- Customer
+- Product
+- SalesOrderHeader
+- SalesOrderLine
 
-## Design principles
+Relationships between these entities are implemented using primary keys and foreign keys to ensure referential integrity and consistent query behaviour.
 
-- Keep raw input data in staging before applying transformations.
-- Store validated and cleaned entities in the core schema.
-- Use surrogate keys for internal relationships.
-- Keep source system identifiers where useful for traceability.
-- Use indexes on common lookup and join columns.
-- Keep reporting access separate from operational tables.
+Indexes are created on frequently used lookup and join columns to support efficient query execution.
 
-## Why this design
+---
 
-The structure is simple enough to run locally in Docker, but it reflects real database engineering concerns: data quality, traceability, maintainability and performance.
+## Design Principles
+
+The database model follows several practical design principles:
+
+- keep raw source data in the staging schema
+- store validated business entities in the core schema
+- use surrogate keys for internal relationships
+- preserve source system identifiers where appropriate
+- optimize common joins using indexes
+- separate operational processing from reporting workloads
+
+---
+
+## Why this Design?
+
+The model is intentionally small enough to run locally using Docker while demonstrating architectural concepts that are commonly applied in enterprise SQL Server solutions.
+
+The focus is on:
+
+- data quality
+- maintainability
+- traceability
+- performance
+- clear separation of responsibilities
