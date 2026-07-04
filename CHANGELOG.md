@@ -1,13 +1,5 @@
 # Changelog
 
-## 2026-07-03
+## v1.0.0 - Initial public release candidate
 
-Initial repository setup.
-
-Added:
-
-- README
-- basic folder structure
-- Docker Compose placeholder
-- Python requirements
-- roadmap
+Added SQL Server foundation, relational model, Python ETL utilities, data generator, monitoring scripts, backup examples, Docker setup, tests and CI.
