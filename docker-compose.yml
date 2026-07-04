@@ -7,3 +7,19 @@ services:
       MSSQL_SA_PASSWORD: "YourStrongPassword123!"
     ports:
       - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+      - ./backups:/var/opt/mssql/backup
+
+  etl:
+    image: python:3.12-slim
+    container_name: edp-etl
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: bash -c "pip install -r requirements.txt && python -m python.data_generator.generate_customers"
+    depends_on:
+      - sqlserver
+
+volumes:
+  sqlserver-data:
